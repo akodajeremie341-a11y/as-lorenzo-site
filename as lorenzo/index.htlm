@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Pressing AS Lorenzo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body { margin:0; font-family:Arial; }
+
+header {
+    background:#0a3d62;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+nav {
+    background:#3c6382;
+    text-align:center;
+    padding:10px;
+}
+
+nav a {
+    color:white;
+    margin:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.section { padding:40px; }
+
+input {
+    padding:10px;
+    width:300px;
+}
+
+table {
+    width:100%;
+    border-collapse: collapse;
+    margin-top:20px;
+}
+
+th, td {
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+th {
+    background:#0a3d62;
+    color:white;
+}
+
+.whatsapp {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#25D366;
+    color:white;
+    padding:15px;
+    border-radius:50%;
+    text-decoration:none;
+}
+
+.btn {
+    padding:10px 15px;
+    background:#0a3d62;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Pressing AS Lorenzo</h1>
+<p>Votre propreté, notre priorité</p>
+</header>
+
+<nav>
+<a href="#tarifs">Tarifs</a>
+<a href="#map">Localisation</a>
+<a href="#paiement">Paiement</a>
+<a href="#contact">Commande</a>
+</nav>
+
+<section class="section" id="tarifs">
+<h2>🔍 Rechercher un article</h2>
+
+<input type="text" id="search" placeholder="Ex: chemise..." onkeyup="rechercher()">
+
+<h2>Nos Tarifs</h2>
+
+<table id="table">
+<tr><th>Article</th><th>Prix</th></tr>
+
+<tr><td>Chemise</td><td>600</td></tr>
+<tr><td>Pantalon</td><td>1000</td></tr>
+<tr><td>T-shirt</td><td>1000</td></tr>
+<tr><td>Robe simple</td><td>1500</td></tr>
+<tr><td>Robe luxe</td><td>4000</td></tr>
+<tr><td>Costume 3 pièces</td><td>1500</td></tr>
+<tr><td>Couverture</td><td>5000</td></tr>
+<tr><td>Couette</td><td>6000</td></tr>
+<tr><td>Oreiller</td><td>1500</td></tr>
+<tr><td>Tapis</td><td>10000</td></tr>
+
+</table>
+</section>
+
+<section class="section" id="map">
+<h2>📍 Notre Localisation</h2>
+
+<iframe
+src="https://maps.google.com/maps?q=Atakpame&t=&z=13&ie=UTF8&iwloc=&output=embed"
+width="100%" height="300" style="border:0;">
+</iframe>
+</section>
+
+<section class="section" id="paiement">
+<h2>💳 Paiement Mobile</h2>
+
+<p>Nous acceptons :</p>
+<ul>
+<li>Flooz</li>
+<li>TMoney</li>
+</ul>
+
+<p>📞 Numéro de paiement : <strong>90 56 64 71</strong></p>
+
+<button class="btn" onclick="payer()">Payer maintenant</button>
+</section>
+
+<section class="section" id="contact">
+<h2>📦 Commander</h2>
+
+<form onsubmit="envoyerWhatsApp(); return false;">
+<input type="text" id="nom" placeholder="Nom" required><br><br>
+<input type="text" id="telephone" placeholder="Téléphone" required><br><br>
+<input type="text" id="article" placeholder="Article"><br><br>
+
+<button class="btn">Envoyer commande</button>
+</form>
+</section>
+
+<a href="https://wa.me/22890566471" class="whatsapp">💬</a>
+
+<script>
+function rechercher() {
+let input = document.getElementById("search").value.toLowerCase();
+let rows = document.querySelectorAll("#table tr");
+
+rows.forEach((row, index) => {
+    if(index === 0) return;
+    let text = row.innerText.toLowerCase();
+    row.style.display = text.includes(input) ? "" : "none";
+});
+}
+
+function envoyerWhatsApp() {
+let nom = document.getElementById("nom").value;
+let tel = document.getElementById("telephone").value;
+let article = document.getElementById("article").value;
+
+let msg = "Commande:%0A"
++ nom + "%0A"
++ tel + "%0A"
++ article;
+
+window.open("https://wa.me/22890566471?text=" + msg);
+}
+
+function payer(){
+alert("Envoyez le paiement via Flooz ou TMoney au 90566471 puis confirmez sur WhatsApp");
+}
+</script>
+
+</body>
+</html>
+<script>
+const articles = [
+{nom:"BAZIN COMPLET", prix:1300},
+{nom:"BERCEAU", prix:20000},
+{nom:"COMPLET", prix:1000},
+{nom:"COUETTE", prix:6000},
+{nom:"COUVERTURE", prix:5000},
+{nom:"CHEMISE", prix:600},
+{nom:"PANTALON", prix:1000},
+{nom:"ROBE MARIEE", prix:15000},
+{nom:"T-SHIRT", prix:1000},
+{nom:"VESTE HOMME", prix:700},
+// 👉 (liste complète à continuer — je peux te générer tout si tu veux)
+];
+
+function rechercher() {
+let input = document.getElementById("search").value.toLowerCase();
+let result = document.getElementById("result");
+result.innerHTML = "";
+
+articles.forEach(a => {
+if(a.nom.toLowerCase().includes(input)){
+result.innerHTML += `<p>${a.nom} - ${a.prix} FCFA</p>`;
+}
+});
+}
+</script>
